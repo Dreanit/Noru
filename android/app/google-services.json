@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "426191565743",
+    "project_id": "noru--the-carpooling-app",
+    "storage_bucket": "noru--the-carpooling-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426191565743:android:a98444e270558469a8f55a",
+        "android_client_info": {
+          "package_name": "com.dreanit.develops"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426191565743-ibffllf04s9deutjrj2hb95ghjka5aud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1aJsOBFZKf4vgYW-70JKARNW9OjzV5CQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426191565743-ibffllf04s9deutjrj2hb95ghjka5aud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
