@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:noru/UI/LoginScreen.dart';
-
-void main() {
+import 'package:noru/UI/Dashboard.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -25,8 +27,9 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        primaryColor: Color(0xff00BDD6)
       ),
-      home: const LoginScreen(),
+      home: const DashBoard(),
     );
   }
 }

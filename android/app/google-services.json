@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "426191565743",
-    "project_id": "noru--the-carpooling-app",
-    "storage_bucket": "noru--the-carpooling-app.appspot.com"
+    "project_number": "210846957315",
+    "project_id": "noru-the-carpooling-app",
+    "storage_bucket": "noru-the-carpooling-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:426191565743:android:a98444e270558469a8f55a",
+        "mobilesdk_app_id": "1:210846957315:android:a02dcb1f55f4f7442ff336",
         "android_client_info": {
-          "package_name": "com.dreanit.develops"
+          "package_name": "com.dreanit.develops.noru"
         }
       },
       "oauth_client": [
         {
-          "client_id": "426191565743-ibffllf04s9deutjrj2hb95ghjka5aud.apps.googleusercontent.com",
+          "client_id": "210846957315-tg42ubc47j6v385r21lrhqf21hdit0dd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA1aJsOBFZKf4vgYW-70JKARNW9OjzV5CQ"
+          "current_key": "AIzaSyCJyUw0SkMw12BPGcBgbY-9g7dSKSwzPUc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "426191565743-ibffllf04s9deutjrj2hb95ghjka5aud.apps.googleusercontent.com",
+              "client_id": "210846957315-tg42ubc47j6v385r21lrhqf21hdit0dd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

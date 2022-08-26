@@ -1,5 +1,10 @@
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:noru/UI/Dashboard.dart';
+import 'package:noru/UI/SignInScreen.dart';
+import 'package:noru/Widgets/customTextField.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,135 +16,183 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         // appBar: AppBar(title: const Text("Login Screen")),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Image(
-              image: AssetImage('assets/noru_logo.jpeg'),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Text(
-                      "Hello!!",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 25,
-                          fontFamily: "Playfair Display"),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const Text(
-                      "Welcome Back",
-                      style: TextStyle(color: Colors.grey, fontSize: 19),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    TextField(
-                      emailController: emailController,
-                      fieldTitle: "Enter Email",
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    TextField(
-                      emailController: passwordController,
-                      fieldTitle: "Enter Password",
-                    ),
-                    // const SizedBox(
-                    //   height: 8,
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: const [
-                    //     Text(
-                    //       "Forgot Password?",
-                    //       style: TextStyle(color: Colors.blue),
-                    //     )
-                    //   ],
-                    // ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(15)),
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                "Sign In",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Image(
+                  image: AssetImage('assets/noru_logo.jpeg'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const Text(
+                        "Hello!!",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25,
+                            fontFamily: "Playfair Display"),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Text(
+                        "Welcome Back",
+                        style: TextStyle(color: Colors.grey, fontSize: 19),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      customTextField(
+                        obscureText: false,
+                        editingController: emailController,
+                        fieldTitle: "Enter Email",
+                        titleText: "Email",
+                        validator: (value) {
+                          if (emailController.text.isEmpty) {
+                            return "Email field can't be empty";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      customTextField(
+                        obscureText: true,
+                        editingController: passwordController,
+                        fieldTitle: "Enter Password",
+                        titleText: "Password",
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return "Please enter password";
+                          }
+                          return null;
+                        },
+                      ),
+                      // const SizedBox(
+                      //   height: 8,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: const [
+                      //     Text(
+                      //       "Forgot Password?",
+                      //       style: TextStyle(color: Colors.blue),
+                      //     )
+                      //   ],
+                      // ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          try {
+                            if (_formKey.currentState!.validate()) {
+                              // If the form is valid, display a snackbar. In the real world,
+                              try{
+                              final user =
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                              print(user);
+                              print(user.user!.emailVerified);
+
+                              if (user.user != null) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DashBoard()));
+                              } }on FirebaseAuthException catch (e){
+                                print(e);
+                                print(e.code);
+                                if (e.code == 'user-not-found') {
+                                  // print('No user found for that email.');
+                                  const snackBar = SnackBar(
+                                    content: Text("User not found!"),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+
+                                }
+                                if (e.code == 'wrong-password') {
+                                  print('Wrong password provided for that user.');
+                                  const snackBar = SnackBar(
+                                    content: Text("Invalid Email Id or Password"),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                }
+                                if(e.message=="The password is invalid or the user does not have a password."){
+                                  print("object");
+                                }
+                                await FirebaseAuth.instance.signOut();
+                              }
+                            }
+                          } catch (e) {
+                            log(e.toString());
+                            rethrow;
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(15)),
+                                height: 40,
+                                child: const Center(
+                                  child: Text(
+                                    "Sign In",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TextField extends StatelessWidget {
-  const TextField({
-    Key? key,
-    required this.emailController,
-    required this.fieldTitle,
-  }) : super(key: key);
-  final String fieldTitle;
-  final TextEditingController emailController;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: emailController,
-      decoration: InputDecoration(
-        labelText: fieldTitle,
-        fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          borderSide: const BorderSide(
-            color: Colors.blue,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          borderSide: const BorderSide(
-            color: Colors.grey,
-            width: 2.0,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 3.5,
+                      ),
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Don't have an account?"),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new SignInScreen()));
+                                },
+                                child: Text('Sign In'))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
