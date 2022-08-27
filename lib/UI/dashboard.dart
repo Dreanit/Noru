@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:noru/helpers/harcodedData/nearbycarsdata.dart';
+
+import '../helpers/models/nearbycarsmodel.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -91,29 +94,16 @@ class _DashBoardState extends State<DashBoard> {
             SizedBox(
               height: 10,
             ),
-            HeadingWithDivider(headingTitle: 'Vehicle List'),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: SizedBox(
-                height: 106,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    VehicleDetailCard(
-                        vehicleName: "Swift Dzire",
-                        vehicleNumber: 'MH 02 AB 438',
-                        vehicleType: '5 Seater'),
-                    VehicleDetailCard(
-                        vehicleName: "Hyundai Creta",
-                        vehicleNumber: 'MH 02 AB 420',
-                        vehicleType: '5 Seater'),
-                    VehicleDetailCard(
-                        vehicleName: "Honda City",
-                        vehicleNumber: 'MH 02 CD 121',
-                        vehicleType: '5 Seater'),
-                  ],
-                ),
-              ),
+            HeadingWithDivider(headingTitle: 'KarPool'),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 3,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return NearByCarCard(
+                  data: nearByCarData[index],
+                );
+              },
             ),
             SizedBox(
               height: 10,
@@ -148,14 +138,111 @@ class _DashBoardState extends State<DashBoard> {
                 onPressed: () {},
               ),
             ),
-            SizedBox(
-              height: 10,
+            HeadingWithDivider(headingTitle: 'Vehicle List'),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: SizedBox(
+                height: 100,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    VehicleDetailCard(
+                        vehicleName: "Swift Dzire",
+                        vehicleNumber: 'MH 02 AB 438',
+                        vehicleType: '5 Seater'),
+                    VehicleDetailCard(
+                        vehicleName: "Hyundai Creta",
+                        vehicleNumber: 'MH 02 AB 420',
+                        vehicleType: '5 Seater'),
+                    VehicleDetailCard(
+                        vehicleName: "Honda City",
+                        vehicleNumber: 'MH 02 CD 121',
+                        vehicleType: '5 Seater'),
+                  ],
+                ),
+              ),
             ),
-            HeadingWithDivider(headingTitle: 'KarPool'),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 20,)
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class NearByCarCard extends StatelessWidget {
+  NearByCarCard({Key? key, required this.data}) : super(key: key);
+  NearByCarsModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: Colors.blue.shade100,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                  flex: 1, child: Image.asset('assets/CarImage/dzire.jpg')),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(data.carName),
+                    Row(
+                      children: [
+                        Text(
+                          'From: ',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Text(data.fromLocation),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'To: ',
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Text(data.toLocation),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.star),
+                            Text(data.rating.toString()),
+                            Text(
+                              ' (${data.reviewTotal} reviews)',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: const [
+                            Text('info'),
+                            Icon(Icons.arrow_right_alt_outlined)
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -277,7 +364,7 @@ class VehicleDetailCard extends StatelessWidget {
             children: [
               Text(
                 vehicleName,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               SizedBox(
                 height: 10,
@@ -286,14 +373,14 @@ class VehicleDetailCard extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Text(
                   vehicleNumber,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   vehicleType,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
             ],

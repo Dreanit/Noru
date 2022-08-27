@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:noru/UI/Dashboard.dart';
-import 'package:noru/UI/SignInScreen.dart';
-import 'package:noru/Widgets/customTextField.dart';
+import 'package:noru/UI/dashboard.dart';
+import 'package:noru/UI/signinscreen.dart';
+import 'package:noru/Widgets/customtextfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
