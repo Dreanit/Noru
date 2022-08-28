@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:noru/helpers/harcodedData/myvehicles.dart';
 import 'package:noru/helpers/harcodedData/nearbycarsdata.dart';
 
+import '../Widgets/customdrawer.dart';
 import '../helpers/models/nearbycarsmodel.dart';
+import 'drawer/My Vehicles/myvehicles.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -33,17 +36,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            ListTile(
-              onTap: () {},
-              leading: Icon(Icons.verified_user),
-              title: Text(''),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       appBar: AppBar(
         title: const Text(
           "NORU",
@@ -143,26 +136,21 @@ class _DashBoardState extends State<DashBoard> {
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: SizedBox(
                 height: 100,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: const [
-                    VehicleDetailCard(
-                        vehicleName: "Swift Dzire",
-                        vehicleNumber: 'MH 02 AB 438',
-                        vehicleType: '5 Seater'),
-                    VehicleDetailCard(
-                        vehicleName: "Hyundai Creta",
-                        vehicleNumber: 'MH 02 AB 420',
-                        vehicleType: '5 Seater'),
-                    VehicleDetailCard(
-                        vehicleName: "Honda City",
-                        vehicleNumber: 'MH 02 CD 121',
-                        vehicleType: '5 Seater'),
-                  ],
+                  itemCount: myVehicleDataList.length,
+                  itemBuilder: (context, index) {
+                    return VehicleDetailCard(
+                        vehicleName: myVehicleDataList[index].name,
+                        vehicleNumber: myVehicleDataList[index].plateNumber,
+                        vehicleType: myVehicleDataList[index].type);
+                  },
                 ),
               ),
             ),
-            SizedBox(height: 20,)
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
