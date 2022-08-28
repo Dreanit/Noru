@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:noru/UI/LoginScreen.dart';
+import 'package:noru/UI/loginscreen.dart';
 
-import '../Widgets/customTextField.dart';
-import 'Dashboard.dart';
+import '../Widgets/customtextfield.dart';
+import 'dashboard.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
