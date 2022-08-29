@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:noru/Authentication/authentication_manager.dart';
+import 'package:noru/UI/loginscreen.dart';
 
-import '../UI/drawer/My Vehicles/myvehicles.dart';
+import '../UI/drawer/My Vehicles/View/myvehicles.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({
+  CustomDrawer({
     Key? key,
   }) : super(key: key);
-
+  AuthenticationManager _authenticationManager = AuthenticationManager();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -78,18 +80,31 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {},
             leading: Icon(Icons.share),
             title: Text('Invite Friends'),
-          ),          ListTile(
+          ),
+          ListTile(
             onTap: () {},
             leading: Icon(Icons.star),
             title: Text('Rate Us'),
-          ),          ListTile(
+          ),
+          ListTile(
             onTap: () {},
             leading: Icon(Icons.details),
             title: Text('About Us'),
-          ),          ListTile(
+          ),
+          ListTile(
             onTap: () {},
             leading: Icon(Icons.question_answer),
             title: Text('FAQ'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) {
+                return LoginScreen();
+              }), (route) => route.isFirst);
+            },
+            leading: Icon(Icons.logout),
+            title: Text('Log Out'),
           ),
         ],
       ),

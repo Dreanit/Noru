@@ -4,7 +4,7 @@ import 'package:noru/helpers/harcodedData/nearbycarsdata.dart';
 
 import '../Widgets/customdrawer.dart';
 import '../helpers/models/nearbycarsmodel.dart';
-import 'drawer/My Vehicles/myvehicles.dart';
+import 'drawer/My Vehicles/View/myvehicles.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+
   timeOfDay() {
     var hr = DateTime.now().hour;
     // before 12:00 pm
@@ -26,6 +27,7 @@ class _DashBoardState extends State<DashBoard> {
     }
     return 'Good Evening';
   }
+
 
   String totalTillDate = 'Total Till Date';
   double totalTillDateAmount = 4206.9;
@@ -54,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                color: Theme.of(context).primaryColor,
+                color: Colors.blue.shade300,
                 child: SizedBox(
                   height: 100,
                   width: MediaQuery.of(context).size.width / 1.05,

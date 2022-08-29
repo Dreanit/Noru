@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:noru/UI/dashboard.dart';
 import 'package:noru/UI/signinscreen.dart';
 import 'package:noru/Widgets/customtextfield.dart';
+import 'package:noru/Widgets/loading_widget.dart';
+
+import '../Authentication/authentication_manager.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,22 +21,30 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
+  AuthenticationManager _authDetails = AuthenticationManager();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // appBar: AppBar(title: const Text("Login Screen")),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Image(
-                  image: AssetImage('assets/noru_logo.jpeg'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+    return Scaffold(
+      backgroundColor: Colors.blue.shade50,
+      // appBar: AppBar(title: const Text("Login Screen")),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Image(
+                image: AssetImage('assets/noru_logo.jpeg'),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade600),
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -46,11 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontFamily: "Playfair Display"),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 5,
                       ),
                       const Text(
                         "Welcome Back",
-                        style: TextStyle(color: Colors.grey, fontSize: 19),
+                        style: TextStyle(color: Colors.grey, fontSize: 22,fontFamily: "Playfair Display"),
                       ),
                       const SizedBox(
                         height: 15,
@@ -99,25 +110,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
+                            loadingWidgetWithContent(context: context);
                           try {
                             if (_formKey.currentState!.validate()) {
                               // If the form is valid, display a snackbar. In the real world,
-                              try{
-                              final user =
-                                  await _auth.signInWithEmailAndPassword(
-                                      email: emailController.text,
-                                      password: passwordController.text);
-                              print(user);
-                              print(user.user!.emailVerified);
+                              try {
+                                final user =
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: emailController.text,
+                                        password: passwordController.text);
+                                print(user);
+                                print(user.user!.emailVerified);
 
-                              if (user.user != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DashBoard()));
-                              } }on FirebaseAuthException catch (e){
+                                if (user.user != null) {
+                                  _authDetails
+                                      .login(user.credential?.token.toString());
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DashBoard()));
+                                }
+                              } on FirebaseAuthException catch (e) {
                                 print(e);
                                 print(e.code);
+                                Navigator.pop(context);
                                 if (e.code == 'user-not-found') {
                                   // print('No user found for that email.');
                                   const snackBar = SnackBar(
@@ -125,17 +141,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
-
                                 }
                                 if (e.code == 'wrong-password') {
-                                  print('Wrong password provided for that user.');
+                                  print(
+                                      'Wrong password provided for that user.');
                                   const snackBar = SnackBar(
-                                    content: Text("Invalid Email Id or Password"),
+                                    content:
+                                        Text("Invalid Email Id or Password"),
                                   );
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 }
-                                if(e.message=="The password is invalid or the user does not have a password."){
+                                if (e.message ==
+                                    "The password is invalid or the user does not have a password.") {
                                   print("object");
                                 }
                                 await FirebaseAuth.instance.signOut();
@@ -156,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 40,
                                 child: const Center(
                                   child: Text(
-                                    "Sign In",
+                                    "Sign Up",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -169,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 3.5,
+                        height: MediaQuery.of(context).size.height / 3.4,
                       ),
                       Container(
                         child: Row(
@@ -190,9 +208,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),
