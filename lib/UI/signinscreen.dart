@@ -57,11 +57,11 @@ class _SignInScreenState extends State<SignInScreen> {
                             fontFamily: "Playfair Display"),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 5,
                       ),
                       const Text(
                         "Create an account  ",
-                        style: TextStyle(color: Colors.grey, fontSize: 19),
+                        style: TextStyle(color: Colors.grey, fontSize: 22,fontFamily: "Playfair Display"),
                       ),
                       const SizedBox(
                         height: 15,
@@ -120,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Row(
                         children: [
@@ -139,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       GestureDetector(
                         onTap: () async {
@@ -169,7 +169,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 height: 40,
                                 child: const Center(
                                   child: Text(
-                                    "Sign In",
+                                    "Sign Up",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -182,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 4.5,
+                        height: MediaQuery.of(context).size.height / 6.1,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -196,7 +196,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                         builder: (context) =>
                                             const LoginScreen()));
                               },
-                              child: const Text('Log In'))
+                              child: const Text('Sign In'))
                         ],
                       )
                     ],
