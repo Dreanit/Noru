@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 40,
                                 child: const Center(
                                   child: Text(
-                                    "Sign Up",
+                                    "Log In",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,

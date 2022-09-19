@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-
+      // darkTheme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   primaryColor: Color(0xff4bb5c5),
+      //   primarySwatch: Colors.blue,
+      //   /* dark theme settings */
+      // ),
+      // themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
       theme: ThemeData(
           // This is the theme of your application.
@@ -30,9 +36,10 @@ class MyApp extends StatelessWidget {
           // or simply save your changes to "hot reload" in a Flutter IDE).
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
+
           primarySwatch: Colors.blue,
           primaryColor: Color(0xff4bb5c5)),
-      home: const LoginScreen(),
+      home: const DashBoard(),
     );
   }
 }

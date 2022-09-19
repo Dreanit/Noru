@@ -1,0 +1,174 @@
+import 'package:flutter/material.dart';
+
+import '../../Widgets/customdrawer.dart';
+import '../../helpers/harcodedData/myvehicles.dart';
+import '../../helpers/harcodedData/nearbycarsdata.dart';
+import '../dashboard.dart';
+import 'package:get/get.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String totalTillDate = 'Total Till Date';
+  double totalTillDateAmount = 4206.9;
+  String lastMonth = 'Last Month';
+  double lastMonthAmount = 1210;
+  String thisMonth = 'This Month';
+  double thisMonthAmount = 1050.9;
+  timeOfDay() {
+    var hr = DateTime.now().hour;
+    // before 12:00 pm
+    if (hr < 12) {
+      return 'Good Morning';
+    }
+    // before 5:00 pm
+    if (hr < 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: CustomDrawer(),
+      appBar: AppBar(
+        title: const Text(
+          "NORU",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.light_mode,
+              ),
+              onPressed: () {
+                Get.changeTheme(ThemeData.light());
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.brightness_2,
+              ),
+              onPressed: () {
+                Get.changeTheme(ThemeData.dark());
+              }),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                color: Colors.blue.shade300,
+                child: SizedBox(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width / 1.05,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hello User!',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "PT Serif"),
+                        ),
+                        Text(
+                          "${timeOfDay()}",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "PT Serif"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            HeadingWithDivider(headingTitle: 'KarPool'),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 3,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return NearByCarCard(
+                  data: nearByCarData[index],
+                );
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            HeadingWithDivider(headingTitle: 'Earnings'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: EarningAmountWidget(
+                      titleString: totalTillDate,
+                      amount: totalTillDateAmount,
+                      onPressed: () {},
+                    ),
+                  ),
+                  Expanded(
+                    child: EarningAmountWidget(
+                      titleString: lastMonth,
+                      amount: lastMonthAmount,
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 200,
+              child: EarningAmountWidget(
+                titleString: thisMonth,
+                amount: thisMonthAmount,
+                onPressed: () {},
+              ),
+            ),
+            HeadingWithDivider(headingTitle: 'Vehicle List'),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: myVehicleDataList.length,
+                  itemBuilder: (context, index) {
+                    return VehicleDetailCard(
+                        vehicleName: myVehicleDataList[index].name,
+                        vehicleNumber: myVehicleDataList[index].plateNumber,
+                        vehicleType: myVehicleDataList[index].type);
+                  },
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
