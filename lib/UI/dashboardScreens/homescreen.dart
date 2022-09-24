@@ -35,28 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text(
-          "NORU",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.light_mode,
-              ),
-              onPressed: () {
-                Get.changeTheme(ThemeData.light());
-              }),
-          IconButton(
-              icon: Icon(
-                Icons.brightness_2,
-              ),
-              onPressed: () {
-                Get.changeTheme(ThemeData.dark());
-              }),
-        ],
+        iconTheme: IconThemeData(color: Colors.black, ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text("NORU"),
+        centerTitle: true,
+        titleTextStyle: TextStyle(color: Colors.black,fontSize: 18),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -67,9 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                color: Colors.blue.shade300,
+                color:  Color(0xff6ab8ee),
                 child: SizedBox(
                   height: 100,
                   width: MediaQuery.of(context).size.width / 1.05,

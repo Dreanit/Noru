@@ -150,7 +150,7 @@ addVehicle(BuildContext context) {
                           plateNumber: carNumberController.text.toUpperCase(),
                           condition: carConditionController.text,
                           fuelType: fuelTypeValue,
-                          imagePath: 'assets/CarImage/dzire.jpg'));
+                          imagePath: 'assets/CarImage/dzire.jpg',nickName: ""));
                       Navigator.pushAndRemoveUntil(context,
                           MaterialPageRoute(builder: (context) {
                         return MyVehiclesScreen();

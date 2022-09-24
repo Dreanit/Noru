@@ -48,6 +48,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.grey.shade500,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex!,
           type: BottomNavigationBarType.fixed, // Fixed
@@ -86,14 +87,14 @@ class NearByCarCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Theme.of(context).primaryColor,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Expanded(
-                  flex: 1, child: Image.asset('assets/CarImage/dzire.jpg')),
+              Expanded(flex: 1, child: ClipRRect(child: Image.asset('${data.imagePath}'),borderRadius: BorderRadius.circular(10),)),
               SizedBox(
                 width: 10,
               ),
@@ -172,7 +173,7 @@ class EarningAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Theme.of(context).primaryColor,
+      color: Colors.cyan,
       child: Stack(
         children: [
           Padding(
@@ -262,7 +263,7 @@ class VehicleDetailCard extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Colors.grey,
+      color: Color(0xdb52c3c9),
       child: SizedBox(
         width: MediaQuery.of(context).size.width / 1.5,
         child: Padding(

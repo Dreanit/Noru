@@ -16,7 +16,7 @@ class _MyVehiclesScreenState extends State<MyVehiclesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.grey[350],
       floatingActionButton: Container(
         decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
         child: Padding(
@@ -37,7 +37,14 @@ class _MyVehiclesScreenState extends State<MyVehiclesScreen> {
           ),
         ),
       ),
-      appBar: AppBar(title: Text('My Vehicles')),
+      appBar: AppBar(
+        title: Text('My Vehicles'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        titleTextStyle: TextStyle(color: Colors.black, fontSize: 18),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: ListView.builder(
           itemCount: myVehicleDataList.length,
           itemBuilder: (context, index) {
@@ -57,37 +64,76 @@ class MyVehicleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
       child: Card(
         elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    Icon(Icons.verified_user,color: Colors.grey,),
+                    Spacer(),
+                    Text(
+                      data.nickName,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18, fontFamily: "Caecilia"),
+                    ),
+                    Spacer(),
+                    Icon(Icons.settings,color: Colors.grey,),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               ClipRRect(
+                borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   data.imagePath,
                   fit: BoxFit.fitHeight,
-                  scale: 2,
+                  scale: 3,
                 ),
-                borderRadius: BorderRadius.circular(10),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              TitleAndValueWidget(title: "Car Name:", data: data.name),
+
+              Text(
+                data.name,
+                style: TextStyle(fontSize: 18, fontFamily: "Caecilia"),
+              ),
+              Text(
+                data.plateNumber,
+                style: TextStyle(
+                    fontSize: 16, color: Colors.grey, fontFamily: "Caecilia"),
+              ),
               SizedBox(
-                height: 10,
+                height: 30,
               ),
-              TitleAndValueWidget(title: 'Car Type:', data: data.type),
-              SizedBox(
-                height: 10,
+              Row(
+
+                children: [
+                  Spacer(),
+                  Icon(Icons.wifi),
+                  Spacer()
+                ],
               ),
-              TitleAndValueWidget(title: 'Car Number:', data: data.plateNumber),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 20,),
+              Row(
+                children: [
+                  Text("Active Vehicle",style: TextStyle(
+                      fontSize: 16, color: Colors.grey, fontFamily: "Caecilia")),
+                  Icon(Icons.info)
+                ],
+              )
             ],
           ),
         ),

@@ -51,7 +51,14 @@ dev_dependencies:
   get:
   get_storage:
   flutter_datetime_picker: ^1.5.1
-#  cloud_firestore: ^3.4.2
+  flutter_google_places: ^0.3.0
+  cloud_firestore: ^3.4.2
+  http:
+  geolocator:
+  geocoding:
+  flutter_typeahead:
+  google_maps_flutter:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -90,6 +97,12 @@ flutter:
     - family: PT Serif
       fonts:
         - asset: fonts/PTSerif-Regular.ttf
+    - family: RobotoSlab
+      fonts:
+        - asset: fonts/RobotoSlab-VariableFont_wght.ttf
+    - family: Caecilia
+      fonts:
+        - asset: fonts/Caecilia-Bold.otf
 
 
   #
