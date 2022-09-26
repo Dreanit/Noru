@@ -32,18 +32,44 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return 'Good Evening';
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       drawer: CustomDrawer(),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black, ),
-        backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text("NORU"),
+        titleTextStyle: TextStyle(color: Colors.black,fontSize: 20),
         centerTitle: true,
-        titleTextStyle: TextStyle(color: Colors.black,fontSize: 18),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Builder(
+            builder: (BuildContext context) {
+              return Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  tooltip:
+                      MaterialLocalizations.of(context).openAppDrawerTooltip,
+                ),
+              );
+            },
+          ),
+        ),
+        backgroundColor: Colors.grey[300],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -57,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
-                color:  Color(0xff6ab8ee),
+                color: Color(0xff6ab8ee),
                 child: SizedBox(
                   height: 100,
                   width: MediaQuery.of(context).size.width / 1.05,

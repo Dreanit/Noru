@@ -6,7 +6,7 @@ List<NearByCarsModel> nearByCarData = [
       rating: 4.2,
       reviewTotal: 22,
       fromLocation: 'Bhopal',
-      toLocation: 'Indore',imagePath: 'assets/CarImage/dzire.jpg'),
+      toLocation: 'Indore',imagePath: 'assets/CarImage/dzire.png'),
   NearByCarsModel(
       carName: 'Honda City',
       rating: 3.2,
@@ -24,11 +24,11 @@ List<NearByCarsModel> nearByCarData = [
       rating: 4.1,
       reviewTotal: 20,
       fromLocation: 'Bhopal',
-      toLocation: 'Indore',imagePath: 'assets/CarImage/dzire.jpg'),
+      toLocation: 'Indore',imagePath: 'assets/CarImage/dzire.png'),
   NearByCarsModel(
       carName: 'Swift Dzire',
       rating: 4.5,
       reviewTotal: 55,
       fromLocation: 'Bhopal',
-      toLocation: 'Sehore',imagePath: 'assets/CarImage/dzire.jpg'),
+      toLocation: 'Sehore',imagePath: 'assets/CarImage/dzire.png'),
 ];

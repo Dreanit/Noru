@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../Widgets/customdrawer.dart';
 import '../helpers/models/nearbycarsmodel.dart';
 import 'dashboardScreens/inboxscreen.dart';
+import 'dashboardScreens/post_ride_screen.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -32,10 +33,10 @@ class _DashBoardState extends State<DashBoard> {
     });
   }
 
-  static List<Widget> _screens = <Widget>[
+  final List<Widget> _screens = [
     ShareRide(),
     HomeScreen(),
-    InboxScreen(),
+    PostRideScreen(),
     InboxScreen()
   ];
   @override
@@ -94,7 +95,12 @@ class NearByCarCard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Expanded(flex: 1, child: ClipRRect(child: Image.asset('${data.imagePath}'),borderRadius: BorderRadius.circular(10),)),
+              Expanded(
+                  flex: 1,
+                  child: ClipRRect(
+                    child: Image.asset('${data.imagePath}'),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
               SizedBox(
                 width: 10,
               ),

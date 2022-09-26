@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noru/Widgets/customtextfieldtype2.dart';
-
+import 'package:flutter_switch/flutter_switch.dart';
 import '../../../../helpers/harcodedData/myvehicles.dart';
 import '../../../../helpers/models/myvehiclesmodel.dart';
 import '../Widget/addVehiclePopUp.dart';
@@ -58,10 +59,20 @@ class _MyVehiclesScreenState extends State<MyVehiclesScreen> {
 
 TextStyle keyStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 18);
 
-class MyVehicleCard extends StatelessWidget {
+class MyVehicleCard extends StatefulWidget {
   MyVehicleCard({Key? key, required this.data}) : super(key: key);
   MyVehicles data;
+
   @override
+  State<MyVehicleCard> createState() => _MyVehicleCardState();
+}
+
+class _MyVehicleCardState extends State<MyVehicleCard> {
+  @override
+  bool value = true;
+  Color _textColor = Colors.black;
+  Color _appBarColor = Color.fromRGBO(36, 41, 46, 1);
+  Color _scaffoldBgcolor = Colors.white;
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
@@ -79,15 +90,21 @@ class MyVehicleCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   children: [
-                    Icon(Icons.verified_user,color: Colors.grey,),
+                    Icon(
+                      Icons.verified_user,
+                      color: Colors.grey,
+                    ),
                     Spacer(),
                     Text(
-                      data.nickName,
+                      widget.data.nickName,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 18, fontFamily: "Caecilia"),
                     ),
                     Spacer(),
-                    Icon(Icons.settings,color: Colors.grey,),
+                    Icon(
+                      Icons.settings,
+                      color: Colors.grey,
+                    ),
                   ],
                 ),
               ),
@@ -97,7 +114,7 @@ class MyVehicleCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  data.imagePath,
+                  widget.data.imagePath,
                   fit: BoxFit.fitHeight,
                   scale: 3,
                 ),
@@ -105,33 +122,33 @@ class MyVehicleCard extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-
               Text(
-                data.name,
+                widget.data.name,
                 style: TextStyle(fontSize: 18, fontFamily: "Caecilia"),
               ),
               Text(
-                data.plateNumber,
+                widget.data.plateNumber,
                 style: TextStyle(
                     fontSize: 16, color: Colors.grey, fontFamily: "Caecilia"),
               ),
               SizedBox(
                 height: 30,
               ),
-              Row(
-
-                children: [
-                  Spacer(),
-                  Icon(Icons.wifi),
-                  Spacer()
-                ],
+              // Row(
+              //   children: const [Spacer(), Icon(Icons.wifi), Spacer()],
+              // ),
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(height: 20,),
               Row(
-                children: [
-                  Text("Active Vehicle",style: TextStyle(
-                      fontSize: 16, color: Colors.grey, fontFamily: "Caecilia")),
-                  Icon(Icons.info)
+                children: const [
+                  Text("Active Vehicle",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                          fontFamily: "Caecilia")),
+                  Icon(Icons.info),
+                  Spacer(),
                 ],
               )
             ],

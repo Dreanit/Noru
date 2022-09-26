@@ -12,6 +12,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 30,
       backgroundColor: Colors.grey[300],
       child: ListView(
         children: [
