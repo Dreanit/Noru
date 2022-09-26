@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:noru/helpers/harcodedData/myvehicles.dart';
-import 'package:noru/helpers/harcodedData/nearbycarsdata.dart';
-
+import 'package:noru/UI/dashboardScreens/homescreen.dart';
+import 'package:noru/UI/dashboardScreens/shareride/shareridescreen.dart';
+import 'package:get/get.dart';
 import '../Widgets/customdrawer.dart';
 import '../helpers/models/nearbycarsmodel.dart';
-import 'drawer/My Vehicles/View/myvehicles.dart';
+import 'dashboardScreens/inboxscreen.dart';
+import 'dashboardScreens/post_ride_screen.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -14,149 +15,67 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-
-  timeOfDay() {
-    var hr = DateTime.now().hour;
-    // before 12:00 pm
-    if (hr < 12) {
-      return 'Good Morning';
-    }
-    // before 5:00 pm
-    if (hr < 17) {
-      return 'Good Afternoon';
-    }
-    return 'Good Evening';
+  void _onItemTapped(int? selectedIndex) {
+//    if (selectedIndex == 2) {
+//      return;
+//    } else
+    setState(() {
+      _pageController!.jumpToPage(selectedIndex!);
+    });
   }
 
+  PageController? _pageController;
+  int? _selectedIndex = 1;
 
-  String totalTillDate = 'Total Till Date';
-  double totalTillDateAmount = 4206.9;
-  String lastMonth = 'Last Month';
-  double lastMonthAmount = 1210;
-  String thisMonth = 'This Month';
-  double thisMonthAmount = 1050.9;
+  void _onPageChanged(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> _screens = [
+    ShareRide(),
+    HomeScreen(),
+    PostRideScreen(),
+    InboxScreen()
+  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: _selectedIndex!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
-      appBar: AppBar(
-        title: const Text(
-          "NORU",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                color: Colors.blue.shade300,
-                child: SizedBox(
-                  height: 100,
-                  width: MediaQuery.of(context).size.width / 1.05,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Hello User!',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "PT Serif"),
-                        ),
-                        Text(
-                          "${timeOfDay()}",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "PT Serif"),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            HeadingWithDivider(headingTitle: 'KarPool'),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return NearByCarCard(
-                  data: nearByCarData[index],
-                );
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            HeadingWithDivider(headingTitle: 'Earnings'),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: EarningAmountWidget(
-                      titleString: totalTillDate,
-                      amount: totalTillDateAmount,
-                      onPressed: () {},
-                    ),
-                  ),
-                  Expanded(
-                    child: EarningAmountWidget(
-                      titleString: lastMonth,
-                      amount: lastMonthAmount,
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: 200,
-              child: EarningAmountWidget(
-                titleString: thisMonth,
-                amount: thisMonthAmount,
-                onPressed: () {},
-              ),
-            ),
-            HeadingWithDivider(headingTitle: 'Vehicle List'),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: SizedBox(
-                height: 100,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: myVehicleDataList.length,
-                  itemBuilder: (context, index) {
-                    return VehicleDetailCard(
-                        vehicleName: myVehicleDataList[index].name,
-                        vehicleNumber: myVehicleDataList[index].plateNumber,
-                        vehicleType: myVehicleDataList[index].type);
-                  },
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            )
+        backgroundColor: Colors.grey.shade500,
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex!,
+          type: BottomNavigationBarType.fixed, // Fixed
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+                label: 'Find Ride',
+                icon: Icon(IconData(0xe1d7, fontFamily: 'MaterialIcons'))),
+            BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
+            BottomNavigationBarItem(
+                label: 'Post Ride', icon: Icon(Icons.add_circle)),
+            BottomNavigationBarItem(
+                label: 'Inbox', icon: Icon(Icons.chat_bubble_outline)),
           ],
+          onTap: (int ind) {
+            _onItemTapped(ind);
+            _selectedIndex = ind;
+          },
+          // type: BottomNavigationBarType.fixed,
         ),
-      ),
-    );
+        body: PageView(
+            children: _screens,
+            controller: _pageController,
+            onPageChanged: _onPageChanged,
+            physics: NeverScrollableScrollPhysics()));
   }
 }
 
@@ -169,14 +88,19 @@ class NearByCarCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Colors.blue.shade100,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
               Expanded(
-                  flex: 1, child: Image.asset('assets/CarImage/dzire.jpg')),
+                  flex: 1,
+                  child: ClipRRect(
+                    child: Image.asset('${data.imagePath}'),
+                    borderRadius: BorderRadius.circular(10),
+                  )),
               SizedBox(
                 width: 10,
               ),
@@ -255,7 +179,7 @@ class EarningAmountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Theme.of(context).primaryColor,
+      color: Colors.cyan,
       child: Stack(
         children: [
           Padding(
@@ -345,7 +269,7 @@ class VehicleDetailCard extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: Colors.grey,
+      color: Color(0xdb52c3c9),
       child: SizedBox(
         width: MediaQuery.of(context).size.width / 1.5,
         child: Padding(
