@@ -24,27 +24,23 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.grey[200],
       // appBar: AppBar(title: const Text("Login Screen")),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Image(
-                image: AssetImage('assets/noru_logo.jpeg'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade600),
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20))),
+             Image.asset('assets/NoruAppLogo.png',scale: 4.5,),
+              Card(
+                shape: RoundedRectangleBorder(borderRadius:BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20))),
+                elevation: 10,
+                margin: EdgeInsets.zero,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -182,7 +178,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 6.1,
+                        height: MediaQuery.of(context).size.height / 7.5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

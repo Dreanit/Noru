@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:noru/UI/dashboardScreens/shareride/leavingfromscreen.dart';
+import 'package:noru/UI/dashboardScreens/shareride/selectLocationScreen.dart';
 import 'package:noru/Widgets/customdrawer.dart';
 import 'package:google_maps_webservice/places.dart';
 class PostRideScreen extends StatefulWidget {
@@ -12,6 +14,10 @@ class PostRideScreen extends StatefulWidget {
 class _PostRideScreenState extends State<PostRideScreen> {
   Prediction? fromLocation;
   Prediction? toLocation;
+  double startLongitude=0.00;
+  double startLatitude=0.00;
+  double destinationLongitude=0.00;
+  double destinationLatitude=0.00;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +70,12 @@ class _PostRideScreenState extends State<PostRideScreen> {
                       MaterialPageRoute(builder: (context) {
                         return SelectLocationScreen();
                       }));
+                  log(fromLocation?.id.toString()??"");
+                  log(fromLocation?.matchedSubstrings[0].toString()??"");
+                  log(fromLocation.toString());
                   setState(() {
                     fromLocation;
+
                   });
                 },
                 child: Container(

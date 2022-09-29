@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:noru/UI/loginscreen.dart';
 import 'package:noru/helpers/Controllers/location_controller.dart';
 
-import 'UI/dashboardScreens/shareride/leavingfromscreen.dart';
+import 'UI/dashboardScreens/shareride/selectLocationScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

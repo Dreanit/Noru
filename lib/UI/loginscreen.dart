@@ -25,26 +25,23 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.grey[200],
       // appBar: AppBar(title: const Text("Login Screen")),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Image(
-                image: AssetImage('assets/noru_logo.jpeg'),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade600),
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20))),
+              Image.asset('assets/NoruAppLogo.png',scale: 4.5,),
+              Card(
+
+                margin: EdgeInsets.zero,
+                elevation: 10,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.only( topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20))),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -187,24 +184,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 3.4,
+                        height: MediaQuery.of(context).size.height / 4,
                       ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Don't have an account?"),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              new SignInScreen()));
-                                },
-                                child: Text('Sign In'))
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Don't have an account?"),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            new SignInScreen()));
+                              },
+                              child: Text('Sign In'))
+                        ],
                       )
                     ],
                   ),

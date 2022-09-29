@@ -59,6 +59,23 @@ flutter:
     - family: Caecilia
       fonts:
         - asset: fonts/Caecilia-Bold.otf
+    - family: OpenSans
+      fonts:
+        - asset: fonts/openSans/OpenSans-Bold.ttf
+        - asset: fonts/openSans/OpenSans-BoldItalic.ttf
+        - asset: fonts/openSans/OpenSans-ExtraBold.ttf
+        - asset: fonts/openSans/OpenSans-ExtraBoldItalic.ttf
+        - asset: fonts/openSans/OpenSans-Italic.ttf
+          style: italic
+        - asset: fonts/openSans/OpenSans-Light.ttf
+        - asset: fonts/openSans/OpenSans-LightItalic.ttf
+        - asset: fonts/openSans/OpenSans-Medium.ttf
+        - asset: fonts/openSans/OpenSans-MediumItalic.ttf
+        - asset: fonts/openSans/OpenSans-Regular.ttf
+          style: normal
+        - asset: fonts/openSans/OpenSans-SemiBold.ttf
+        - asset: fonts/openSans/OpenSans-SemiBoldItalic.ttf
+
 
 
   #

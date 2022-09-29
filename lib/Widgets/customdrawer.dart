@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noru/Authentication/authentication_manager.dart';
 import 'package:noru/UI/loginscreen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../UI/drawer/My Vehicles/View/myvehicles.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -9,6 +9,7 @@ class CustomDrawer extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   AuthenticationManager _authenticationManager = AuthenticationManager();
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -100,6 +101,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
+              _auth.signOut();
               Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) {
                 return LoginScreen();

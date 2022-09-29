@@ -34,6 +34,7 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
             GoogleMap(
                 onMapCreated: (GoogleMapController mapController) {
                   _mapController = mapController;
+                  // CameraPosition.fromMap(mapController);
                   // locationController.setMapController(mapController);
                 },
                 initialCameraPosition: _cameraPosition),
@@ -102,7 +103,9 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
                         );
                       },
                       onSuggestionSelected: (Prediction suggestion) {
-                        log("My location is " + suggestion.description!);
+                        log("My location is " + suggestion.placeId.toString());
+                        log("My location is " + suggestion.toString());
+                        log("My location is " + suggestion.reference.toString());
                         // Get.find<LocationController>().setLocation(suggestion.placeId!, suggestion.description!, mapController);
                         Navigator.pop(context, suggestion);
                       },

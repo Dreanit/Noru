@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:noru/Widgets/snackBar.dart';
 
-import 'leavingfromscreen.dart';
+import 'selectLocationScreen.dart';
 
 class ShareRide extends StatefulWidget {
   const ShareRide({Key? key}) : super(key: key);
