@@ -178,7 +178,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 7.5,
+                        height:100,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

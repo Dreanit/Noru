@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noru/UI/dashboardScreens/homescreen.dart';
 import 'package:noru/UI/dashboardScreens/shareride/shareridescreen.dart';
-import 'package:get/get.dart';
-import '../Widgets/customdrawer.dart';
 import '../helpers/models/nearbycarsmodel.dart';
 import 'dashboardScreens/inboxscreen.dart';
-import 'dashboardScreens/post_ride_screen.dart';
+import 'dashboardScreens/post_ride/post_ride_screen.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);

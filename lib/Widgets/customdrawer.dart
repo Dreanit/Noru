@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noru/Authentication/authentication_manager.dart';
+import 'package:noru/UI/drawer/UserProfile.dart';
 import 'package:noru/UI/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../UI/drawer/My Vehicles/View/myvehicles.dart';
@@ -18,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         children: [
           Container(
-            color:  Color(0xff1fa1a1),
+            color: Color(0xff1fa1a1),
             height: 200,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -41,16 +42,28 @@ class CustomDrawer extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 8),
-                          child: Text(
-                            'My Profile',
-                            style: TextStyle(color: Colors.white),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return UserProfile();
+                              },
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 8),
+                            child: Text(
+                              'My Profile',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       )

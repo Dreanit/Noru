@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:noru/Widgets/snackBar.dart';
 
+import '../../../helpers/models/place_autocomplete_model.dart';
 import 'selectLocationScreen.dart';
 
 class ShareRide extends StatefulWidget {
@@ -13,8 +14,8 @@ class ShareRide extends StatefulWidget {
 }
 
 class _ShareRideState extends State<ShareRide> {
-  Prediction? fromLocation;
-  Prediction? toLocation;
+  PlaceAutoComplete? fromLocation;
+  PlaceAutoComplete? toLocation;
   DateTime dateSelected = DateTime.now();
   String TodayDate = DateFormat("dd MMM, yy").format(DateTime.now());
   String TomorrowDate = DateFormat("dd MMM, yy").format(DateTime(
@@ -67,7 +68,7 @@ class _ShareRideState extends State<ShareRide> {
                                 )
                               : Expanded(
                                   child: Text(
-                                  "${fromLocation!.description}",
+                                  "${fromLocation!.completeName}",
                                   softWrap: true,
                                     style: TextStyle(fontSize: 16),
                                 )),
@@ -106,7 +107,7 @@ class _ShareRideState extends State<ShareRide> {
                                 )
                               : Expanded(
                                   child: Text(
-                                  "${toLocation!.description}",
+                                  "${toLocation!.completeName}",
                                   softWrap: true,
                                     style: TextStyle(fontSize: 16),
                                 )),
